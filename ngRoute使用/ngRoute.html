@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../js/angular.min.js"></script>
+	<script src="../js/angular-route.js"></script>
+</head>
+<body ng-controller="myCtrl">
+<div style="width:50%;margin:0 auto;">
+	<a href="#/login">登录页</a>
+	<a href="#/main">主页</a>
+	<button ng-click="jump('/login')">登录页</button>
+	<button ng-click="jump('/main')">主页</button>
+</div>
+<hr/>
+
+<div ng-view style="width:50%;margin:0 auto;border:1px solid black">
+</div>
+
+
+<script>
+    var app=angular.module('myApp',['ng','ngRoute']);
+    app.config(function($routeProvider){
+        $routeProvider.when('/login',{
+            templateUrl:'template/login.html',
+            controller:'myCtrl'
+        }).
+        when('/main',{
+            templateUrl:'template/main.html',
+            controller:'myCtrl'
+        }).
+        when('/main/:id',{
+            templateUrl:'template/main.html',
+            controller:'mainCtrl'
+        }).
+        otherwise({redirectTo:'/login'});
+    });
+    app.controller('myCtrl',['$scope','$location',function($scope,$location){
+        $scope.jump=function(arg){
+            $location.path(arg);
+        };
+        $scope.returnMain=function () {
+			$location.path('/main/123');
+        };
+    }]);
+    app.controller('mainCtrl',['$scope','$routeParams',function ($scope,$routParams) {
+        console.log($routParams.id);
+        $scope.Id=$routParams.id;
+    }])
+
+
+</script>
+</body>
+</html>

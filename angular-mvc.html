@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- 步骤二:注册模块 -->
+<html lang="en" ng-app="myModule">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/angular.min.js"></script>
+	<style>
+		ul{
+			list-style: none;
+		}
+	</style>
+</head>
+<!-- 调用myModule模块 -->
+<body>
+	<!-- 步骤四 -->
+	<div class="contain" ng-controller="myCtrl">
+		<ul>
+		<!-- 步骤六 -->
+			<li ng-repeat="obj in spotList">
+				<!-- ng-src中使用模型数据时必须加{{}} -->
+				<img ng-src="images/{{obj.url}}" alt="" />
+				<!-- <h1>{{obj.name}}</h1>
+				<p>{{obj.price}}</p> -->
+				<ul>
+					<li>景点:{{obj.name}}</li>
+					<li>票价:{{obj.price}}</li>
+				</ul>
+			</li>
+		</ul>
+		<button ng-click="addMore()">加载更多</button>
+	</div>
+
+	
+
+
+	<script>
+	    // 步骤一：申明模板
+    	var app=angular.module('myModule',['ng']);
+    	// 步骤三：申明控制器
+    	app.controller("myCtrl",function($scope){
+    	// 步骤五
+		// 初始化模型数据（1.用ng-init，耦合度高。2.使用$scope）
+			$scope.spotList=[
+			{url:'1.jpg',name:'风景一',price:100},
+			{url:'2.jpg',name:'风景二',price:200},
+			{url:'3.jpg',name:'风景三',price:300}
+			];
+
+			$scope.addMore=function(){
+				$scope.spotList.push({url:'4.jpg',name:'风景四',price:400});
+			}
+		});
+
+	</script>
+</body>
+</html>

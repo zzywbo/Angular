@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='myModule'>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular小练习——自定义指令</title>
+	<script src="js/angular.min.js"></script>
+</head>
+<body>
+	<div class="contain" ng-controller="myCtrl">
+		<h2>作为属性</h2>
+		<div ts-directive ts-name="in Angular"></div>
+		<hr>
+		<h2>作为Class</h2>
+		<div class="ts-directive"></div>
+		<hr>
+		<h2>作为标签</h2>
+		<ts-directive></ts-directive>
+		<hr>
+		<h2>作为注释</h2>
+		<!-- directive:ts-directive -->
+
+
+	</div>
+
+
+	<script>
+		var app=angular.module('myModule',['ng']);
+		app.controller('myCtrl',function(){
+
+		});
+
+		app.directive('tsDirective',function(){
+			return {
+				template:"<h3>It's my first Directive {{tsName}}</h3>",
+				restrict:"EACM",
+				scope:{
+					tsName:'@'
+				},
+				replace:true
+			};
+		});
+		
+
+
+	</script>
+</body>
+</html>

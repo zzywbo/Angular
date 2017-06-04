@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+	<meta charset="UTF-8">
+	<title>angular小练习——双向绑定</title>
+	<script src="js/angular.min.js"></script>
+</head>
+<body>
+<h3>1、方向1的绑定（Model数据 绑定到View）</h3>
+	<xmp>
+		实现方法:双花括号、常用指令（ngRepeat/ngBind/ngIf...）
+		相比DOM操作：先去查找元素，再去设置元素，只需要把model数据绑定视图上，数据改，视图就会更新。
+   </xmp>
+<h3>2、方向2的绑定（将View数据绑定到Model数据）</h3>
+
+        实现方法只有一种方式： ng-model
+	<xmp>
+		<input type='text' ng-model='myText'/>
+		例如$scope.$watch('模型变量名',function(){})
+	</xmp>
+	<hr/>
+
+    <div ng-controller="myCtrl">
+		<input type="text" ng-model='txt'>
+		<p>{{txt}}</p>
+    </div>
+
+    <script>
+    	var app=angular.module('myModule', ['ng']);
+    	app.controller('myCtrl',function($scope){
+    		$scope.$watch('txt',function(){
+    			console.log($scope.txt);
+    		})
+    	});
+    	
+    </script>
+
+</body>
+</html>

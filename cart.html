@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular小练习——购物车</title>
+</head>
+<body>
+	<div class="contain" ng-controller="myCtrl">
+		<button ng-click="add()">添加</button>	
+		<table>
+			<thead>
+				<tr>
+					<th>单价</th>
+					<th>数量</th>
+					<th>合计</th>
+					<th>删除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="obj in cart">
+					<th ng-bind="obj.price"></th>
+					<th ng-bind="obj.num"></th>
+					<th ng-bind="obj.num*obj.price"></th>
+					<th><button ng-click="delete($index)">删除</button></th>
+				</tr>
+			</tbody>
+		</table>
+
+
+	</div>
+
+
+
+	<script src="js/angular.min.js"></script>
+	<script>
+		var app=angular.module('myApp', ['ng']);
+		app.controller('myCtrl',function($scope){
+			$scope.cart=[
+			             {price:5,num:4},
+						 {price:4,num:7},
+						 {price:6,num:5}
+						];
+			$scope.moreGoods=[
+							  {price:1,num:2},
+							  {price:3,num:4},
+							  {price:5,num:6}
+							 ];
+			$scope.add=function(){
+				if($scope.moreGoods.length!=0){
+					$scope.cart.push($scope.moreGoods.shift());
+				}
+			};
+
+			$scope.delete=function(index){
+				$scope.cart.splice(index,1);
+			};
+		});	
+
+
+	</script>
+	
+</body>
+</html>

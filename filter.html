@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='myApp'>
+<head>
+	<meta charset="UTF-8">
+	<title>过滤器</title>
+	<script src="js/angular.min.js"></script>
+</head>
+<body>
+	<div ng-controller='myCtrl'>
+		<div ng-repeat='object in Array | limitTo:3 | orderBy:true'>{{object}}</div>
+
+	</div>
+
+
+	<script>
+	var app=angular.module('myApp',['ng']);
+	app.controller('myCtrl',function($scope){
+		$scope.Array=[10,20,5,4,9];
+	});
+
+
+	</script>
+	
+</body>
+</html>
